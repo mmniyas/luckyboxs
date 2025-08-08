@@ -1,0 +1,25 @@
+#box-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.box {
+  width: 130px;
+  height: 130px;
+  font-size: 22px;
+  background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.box.clicked {
+  cursor: not-allowed;
+  color: white;
+}

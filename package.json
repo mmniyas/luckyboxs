@@ -1,0 +1,16 @@
+{
+  "name": "luckybox",
+  "version": "1.0.0",
+  "description": "One-click lucky box system with phone number tracking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Thulisoft",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "open": "^10.2.0",
+    "uuid": "^11.1.0"
+  }
+}
