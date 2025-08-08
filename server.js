@@ -3,17 +3,18 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 3000; // ✅ REQUIRED for Render hosting
+const PORT = process.env.PORT || 3000;
 
 const DB_FILE = "links.json";
 const ALLOWED_FILE = "allowedPhones.json";
 const CLICK_LOG = "clicks.json";
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("public")); // Serve static files from "public" folder
 
-app.use(express.static(__dirname));  // serves from root
-res.sendFile(path.join(__dirname, "game.html"));  // serves directly
+// ✅ Serve game.html on visiting /game
+app.get("/game", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "game.html"));
 });
 
 // ✅ Return all box data
@@ -39,7 +40,7 @@ app.post("/api/markUsed", (req, res) => {
 
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 
-    // ✅ Save to clicks log
+    // ✅ Save to click logs
     let logs = [];
     if (fs.existsSync(CLICK_LOG)) {
       logs = JSON.parse(fs.readFileSync(CLICK_LOG));
@@ -69,7 +70,7 @@ app.get("/api/verify-phone", (req, res) => {
   res.json({ allowed: isAllowed });
 });
 
-// ✅ Start server
+// ✅ Start the server
 app.listen(PORT, () => {
   console.log(`✅ Server running at: http://localhost:${PORT}`);
 });
