@@ -12,9 +12,8 @@ const CLICK_LOG = "clicks.json";
 app.use(express.json());
 app.use(express.static("public"));
 
-// ✅ Serve game.html
-app.get("/game", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "game.html"));
+app.use(express.static(__dirname));  // serves from root
+res.sendFile(path.join(__dirname, "game.html"));  // serves directly
 });
 
 // ✅ Return all box data
