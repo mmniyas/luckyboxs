@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // ✅ REQUIRED for Render hosting
 
 const DB_FILE = "links.json";
 const ALLOWED_FILE = "allowedPhones.json";
@@ -70,6 +70,7 @@ app.get("/api/verify-phone", (req, res) => {
   res.json({ allowed: isAllowed });
 });
 
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running at: http://localhost:${PORT}`);
 });
