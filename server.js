@@ -9,10 +9,11 @@ const DB_FILE = "links.json";
 const ALLOWED_FILE = "allowedPhones.json";
 const CLICK_LOG = "clicks.json";
 
+// Middleware
 app.use(express.json());
-app.use(express.static("public")); // Serve static files from "public" folder
+app.use(express.static("public")); // Serves static files (HTML, CSS, JS)
 
-// ✅ Serve game.html on visiting /game
+// ✅ Serve game.html
 app.get("/game", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "game.html"));
 });
@@ -40,7 +41,7 @@ app.post("/api/markUsed", (req, res) => {
 
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
 
-    // ✅ Save to click logs
+    // Save click log
     let logs = [];
     if (fs.existsSync(CLICK_LOG)) {
       logs = JSON.parse(fs.readFileSync(CLICK_LOG));
